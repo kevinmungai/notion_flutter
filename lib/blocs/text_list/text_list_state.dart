@@ -19,5 +19,5 @@ class CurrentTextList extends TextListState {
   List<Object> get props => [textList];
 
   @override
-  String toString() => "CurrentTextList { textList: ${textList.map((text) => "$text")}";
+  String toString() => "CurrentTextList { textList: ${textList.map((text) => "$text")} }";
 }

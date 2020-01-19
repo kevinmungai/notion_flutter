@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notion_flutter/blocs/text/bloc.dart';
 import 'package:notion_flutter/blocs/text_list/bloc.dart';
 import 'package:notion_flutter/ui/editor_bottom/editor_bottom.dart';
+import 'package:notion_flutter/ui/editor_page/editor_widget.dart';
+import 'package:notion_flutter/ui/editor_page/text_widget.dart';
 
 class EditorPage extends StatelessWidget {
   @override
@@ -18,46 +20,29 @@ class EditorPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 16, right: 16),
                 child: CustomScrollView(
                   slivers: <Widget>[
+                    SliverToBoxAdapter(
+                      child: Text("ddjfkfjjsjs s", style: TextStyle(fontSize: 16),),
+                    ),
                     BlocBuilder<TextListBloc, TextListState>(
                       builder: (context, state) {
                         if (state is CurrentTextList) {
+                          print("if");
                           return SliverList(
                             delegate: SliverChildBuilderDelegate(
                                 (context, index) {
-                                  return TextField(
-                                    controller: TextEditingController(text: state.textList.elementAt(index)),
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  );
+                                  return TextWidget(text: state.textList.elementAt(index));
                                 },
                               childCount: state.textList.length,
                             ),
                           );
                         } else {
+                          print("else");
                           return SliverToBoxAdapter(child: Container());
                         }
                       },
                     ),
                     SliverFillRemaining(
-                      child: TextField(
-                        maxLines: null,
-                        minLines: null,
-                        expands: true,
-                        autofocus: false,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.all(0)
-                        ),
-                        onChanged: (String text) {
-                          //print(text);
-                          BlocProvider.of<TextBloc>(context).add(ChangeText(text: text));
-                        },
-                        onSubmitted: (String text) {
-                          print("submitted");
-                          BlocProvider.of<TextBloc>(context).add(AddToTextListBloc());
-                        },
-                      ),
+                      child: EditorWidget(),
                     ),
                   ],
                 ),

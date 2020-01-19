@@ -10,16 +10,26 @@ class TextWidget extends StatefulWidget {
 }
 
 class _TextWidgetState extends State<TextWidget> {
+  TextEditingController _textEditingController;
 
   @override
   void initState() {
-    // TODO: implement initState
+    _textEditingController = TextEditingController(text: widget.text);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
     return TextField(
-
+      maxLines: null,
+      //expands: true,
+      controller: _textEditingController,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(0),
+        border: InputBorder.none,
+      ),
+      style: TextStyle(
+        //fontSize: 30,
+      ),
     );
   }
 }

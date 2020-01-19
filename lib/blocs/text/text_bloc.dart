@@ -17,7 +17,7 @@ class TextBloc extends Bloc<TextEvent, TextState> {
     TextEvent event,
   ) async* {
     if (event is ChangeText) {
-      print(event);
+      //print(event);
       final newState = CurrentText(text: event.text);
       yield newState;
       print(newState);
@@ -35,6 +35,7 @@ class TextBloc extends Bloc<TextEvent, TextState> {
       if (state is CurrentText) {
         final currentText = (state as CurrentText).text;
         textListBloc.add(AddToTextList(text: currentText));
+        add(ClearText());
       }
 
     }
