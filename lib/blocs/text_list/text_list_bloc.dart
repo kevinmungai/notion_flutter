@@ -17,10 +17,23 @@ class TextListBloc extends Bloc<TextListEvent, TextListState> {
         final currentTextList = (state as CurrentTextList).textList;
         yield CurrentTextList(
           textList: [...currentTextList, event.text],
+          addNewText: false,
         );
       } else {
         yield CurrentTextList(
-          textList: [event.text]
+          textList: [event.text],
+          addNewText: false,
+        );
+      }
+    }
+
+    if (event is CreateNewTextField) {
+      print(event);
+      if (state is CurrentTextList) {
+        final currentTextList = (state as CurrentTextList);
+        yield CurrentTextList(
+          textList: currentTextList.textList,
+          addNewText: true,
         );
       }
     }

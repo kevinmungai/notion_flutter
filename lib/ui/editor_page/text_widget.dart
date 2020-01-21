@@ -20,6 +20,7 @@ class _TextWidgetState extends State<TextWidget> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      textInputAction: TextInputAction.newline,
       maxLines: null,
       //expands: true,
       controller: _textEditingController,
@@ -30,6 +31,12 @@ class _TextWidgetState extends State<TextWidget> {
       style: TextStyle(
         //fontSize: 30,
       ),
+      onChanged: (String text) {
+        print("onChanged: $text");
+      },
+      onSubmitted: (String text) {
+        print("onSubmitted: $text");
+      },
     );
   }
 }

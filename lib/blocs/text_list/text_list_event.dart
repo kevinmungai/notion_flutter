@@ -16,3 +16,11 @@ class AddToTextList extends TextListEvent {
   @override
   String toString() => "AddToTextList { text: $text }";
 }
+
+class CreateNewTextField extends TextListEvent {
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => "CreateNewTextField {}";
+}

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notion_flutter/blocs/text/text_bloc.dart';
 import 'package:notion_flutter/blocs/text_list/bloc.dart';
 import 'package:notion_flutter/ui/editor_page/editor_page.dart';
+import 'package:notion_flutter/ui/text_field_error/text_field_error.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       initialRoute: "/editor-page",
-      routes: {"/editor-page": (context) => EditorPage()},
+      routes: {
+        "/editor-page": (context) => EditorPage(),
+        "/text-field-error": (context) => TextFieldError(),
+      },
     );
   }
 }

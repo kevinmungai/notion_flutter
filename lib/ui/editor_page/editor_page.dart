@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notion_flutter/blocs/text/bloc.dart';
 import 'package:notion_flutter/blocs/text_list/bloc.dart';
-import 'package:notion_flutter/ui/editor_bottom/editor_bottom.dart';
+import 'package:notion_flutter/ui/editor_bottom/editor_controls.dart';
 import 'package:notion_flutter/ui/editor_page/editor_widget.dart';
 import 'package:notion_flutter/ui/editor_page/text_widget.dart';
 
@@ -48,7 +48,7 @@ class EditorPage extends StatelessWidget {
                 ),
               ),
             ),
-            EditorBottom(),
+            EditorControls(),
           ],
         ),
       ),

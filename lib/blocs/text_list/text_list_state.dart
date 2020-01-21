@@ -12,12 +12,14 @@ class InitialTextListState extends TextListState {
 
 class CurrentTextList extends TextListState {
   final List<String> textList;
+  final bool addNewText;
 
-  CurrentTextList({@required this.textList});
+  CurrentTextList({@required this.textList, @required this.addNewText});
 
   @override
   List<Object> get props => [textList];
 
   @override
-  String toString() => "CurrentTextList { textList: ${textList.map((text) => "$text")} }";
+  String toString() => "CurrentTextList { textList: ${textList.map((text) => "$text")}, addNewText: $addNewText }";
 }
+
