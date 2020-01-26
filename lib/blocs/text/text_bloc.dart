@@ -30,7 +30,7 @@ class TextBloc extends Bloc<TextEvent, TextState> {
       print(newState);
     }
 
-    if (event is AddToTextListBloc) {
+    if (event is AddToTextListBlocEnd) {
       print(event);
       if (state is CurrentText) {
         final currentText = (state as CurrentText).text;
@@ -38,6 +38,13 @@ class TextBloc extends Bloc<TextEvent, TextState> {
         add(ClearText());
       }
 
+    }
+
+    if (event is AddToTextListBlocMiddle) {
+      print(event);
+      if (state is CurrentText) {
+
+      }
     }
   }
 }

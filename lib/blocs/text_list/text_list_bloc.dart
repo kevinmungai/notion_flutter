@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:notion_flutter/data_types/GeneralTextData.dart';
 import './bloc.dart';
 
 class TextListBloc extends Bloc<TextListEvent, TextListState> {
@@ -14,28 +15,39 @@ class TextListBloc extends Bloc<TextListEvent, TextListState> {
       print(event);
 
       if (state is CurrentTextList) {
-        final currentTextList = (state as CurrentTextList).textList;
+        final generalTextData = (state as CurrentTextList).generalTextData;
         yield CurrentTextList(
-          textList: [...currentTextList, event.text],
-          addNewText: false,
+          generalTextData: GeneralTextData.addTextSimpleEnd(
+              text: event.text,
+              generalTextData: generalTextData,
+          ),
         );
       } else {
         yield CurrentTextList(
-          textList: [event.text],
-          addNewText: false,
+          generalTextData: GeneralTextData.addTextSimpleEnd(
+            text: event.text,
+            generalTextData: GeneralTextData.entirelyNew(),
+          ),
         );
       }
     }
 
-    if (event is CreateNewTextField) {
-      print(event);
-      if (state is CurrentTextList) {
-        final currentTextList = (state as CurrentTextList);
-        yield CurrentTextList(
-          textList: currentTextList.textList,
-          addNewText: true,
-        );
-      }
+
+  if (event is AddToTextListMiddle) {
+    print(event);
+    if (state is CurrentTextList) {
+      final generalTextData = (state as CurrentTextList).generalTextData;
+      final newState = CurrentTextList(
+          generalTextData: GeneralTextData.addTextByID(
+              index: event.index,
+              text: event.text,
+              generalTextData: generalTextData,
+          ),
+      );
+      yield newState;
+      print(newState);
     }
+
+  }
   }
 }

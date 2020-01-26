@@ -21,7 +21,10 @@ class EditorPage extends StatelessWidget {
                 child: CustomScrollView(
                   slivers: <Widget>[
                     SliverToBoxAdapter(
-                      child: Text("ddjfkfjjsjs s", style: TextStyle(fontSize: 16),),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Text("ddjfkfjjsjs s", style: TextStyle(fontSize: 16),),
+                      ),
                     ),
                     BlocBuilder<TextListBloc, TextListState>(
                       builder: (context, state) {
@@ -30,9 +33,12 @@ class EditorPage extends StatelessWidget {
                           return SliverList(
                             delegate: SliverChildBuilderDelegate(
                                 (context, index) {
-                                  return TextWidget(text: state.textList.elementAt(index));
+                                  return TextWidget(
+                                    text: state.generalTextData.textList.elementAt(index),
+                                    index: index,
+                                  );
                                 },
-                              childCount: state.textList.length,
+                              childCount: state.generalTextData.textList.length,
                             ),
                           );
                         } else {

@@ -19,7 +19,7 @@ class _EditorWidgetState extends State<EditorWidget> {
   Widget build(BuildContext context) {
     return TextField(
       controller: _textEditingController,
-      textInputAction: TextInputAction.done,
+      //textInputAction: TextInputAction.done,
       maxLines: null,
       minLines: null,
       expands: true,
@@ -28,22 +28,31 @@ class _EditorWidgetState extends State<EditorWidget> {
           border: InputBorder.none,
           contentPadding: const EdgeInsets.all(0)
       ),
+      style: TextStyle(
+        fontSize: 16,
+      ),
       onChanged: (String text) {
         //print(text);
         setState(() {
           print("onChanged");
           BlocProvider.of<TextBloc>(context).add(ChangeText(text: text));
+          final splitText = text.split("\n");
+          if (splitText.length > 1) {
+            print("splitText: $splitText");
+            BlocProvider.of<TextBloc>(context).add(AddToTextListBlocEnd());
+            _textEditingController.text = "";
+          }
         });
       },
-      onSubmitted: (String text) {
-
-        setState(() {
-          print("onSubmitted");
-          BlocProvider.of<TextBloc>(context).add(AddToTextListBloc());
-          _textEditingController.text = "";
-        });
-
-      },
+//      onSubmitted: (String text) {
+//
+//        setState(() {
+//          print("onSubmitted");
+//          BlocProvider.of<TextBloc>(context).add(AddToTextListBloc());
+//          _textEditingController.text = "";
+//        });
+//
+//      },
     );
   }
 }

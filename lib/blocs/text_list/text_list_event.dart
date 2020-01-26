@@ -17,10 +17,15 @@ class AddToTextList extends TextListEvent {
   String toString() => "AddToTextList { text: $text }";
 }
 
-class CreateNewTextField extends TextListEvent {
-  @override
-  List<Object> get props => [];
+class AddToTextListMiddle extends TextListEvent {
+  final int index;
+  final String text;
+
+  AddToTextListMiddle({@required this.index, @required this.text});
 
   @override
-  String toString() => "CreateNewTextField {}";
+  List<Object> get props => [index, text];
+
+  @override
+  String toString() => "AddToTextListMiddle { index: $index, text: $text }";
 }

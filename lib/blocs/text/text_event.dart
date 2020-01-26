@@ -22,10 +22,19 @@ class ClearText extends TextEvent {
   List<Object> get props => [];
 }
 
-class AddToTextListBloc extends TextEvent {
+class AddToTextListBlocEnd extends TextEvent {
   @override
   List<Object> get props => [];
 
   @override
   String toString() => "AddToTextListBloc {}";
+}
+
+class AddToTextListBlocMiddle extends TextEvent {
+  final int index;
+
+  AddToTextListBlocMiddle({@required this.index});
+
+  @override
+  List<Object> get props => [index];
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notion_flutter/blocs/text_list/bloc.dart';
 
 class TextWidget extends StatefulWidget {
   final String text;
+  final int index;
 
-  TextWidget({@required this.text});
+  TextWidget({@required this.text, @required this.index});
 
   @override
   _TextWidgetState createState() => _TextWidgetState();
@@ -29,14 +32,26 @@ class _TextWidgetState extends State<TextWidget> {
         border: InputBorder.none,
       ),
       style: TextStyle(
-        //fontSize: 30,
+        fontSize: 16,
       ),
       onChanged: (String text) {
-        print("onChanged: $text");
+        final splittedString = text.split("\n");
+        print("onChanged: ${text}");
+        if (splittedString.length > 1) {
+          print("one: ${splittedString[0]}");
+          print("two: ${splittedString[1]}");
+          BlocProvider.of<TextListBloc>(context).add(
+              AddToTextListMiddle(index: widget.index, text: splittedString[1]));
+          _textEditingController.text = splittedString[0];
+        }
+
       },
-      onSubmitted: (String text) {
-        print("onSubmitted: $text");
-      },
+//      onSubmitted: (String text) {
+//        final splittedString = text.split("\n");
+//        print("onsubmitted: ${text.split("\n")}");
+//        print("one: ${splittedString[0]}");
+//        print("two: ${splittedString[1]}");
+//      },
     );
   }
 }
